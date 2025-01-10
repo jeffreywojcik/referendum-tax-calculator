@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referendum Tax Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a3e2e;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            color: #1a3e2e;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #000000;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #000000;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Port Washington-Saukville School District<br>Referendum Tax Calculator</h2>
+        <label for="homeValue">Enter Your Home Value ($):</label>
+        <input type="number" id="homeValue" placeholder="e.g., 250000">
+        
+        <label for="taxRate">Enter Proposed Tax Rate (per $1000 of value):</label>
+        <input type="number" id="taxRate" value="0.26">
+        
+        <button onclick="calculateTax()">Calculate Tax Impact</button>
+        
+        <h3>Estimated Annual Tax Increase: <span id="annualResult">$0.00</span></h3>
+        <h3>Estimated Monthly Tax Increase: <span id="monthlyResult">$0.00</span></h3>
+    </div>
+
+    <script>
+        function calculateTax() {
+            let homeValue = parseFloat(document.getElementById('homeValue').value);
+            let taxRate = parseFloat(document.getElementById('taxRate').value);
+            
+            if (isNaN(homeValue) || isNaN(taxRate) || homeValue < 0 || taxRate < 0) {
+                alert('Please enter valid positive numbers.');
+                return;
+            }
+            
+            let annualTaxImpact = (homeValue / 1000) * taxRate;
+            let monthlyTaxImpact = annualTaxImpact / 12;
+            
+            document.getElementById('annualResult').innerText = `$${annualTaxImpact.toFixed(2)}`;
+            document.getElementById('monthlyResult').innerText = `$${monthlyTaxImpact.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
